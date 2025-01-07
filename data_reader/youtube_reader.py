@@ -24,6 +24,6 @@ class Youtube_Reader:
         json = r.json()
         result = list()
         for item in json["items"]:
-            result.append(item["snippet"]["topLevelComment"]["snippet"]["textDisplay"])
+            result.append(item["snippet"]["topLevelComment"]["snippet"]["textOriginal"])
 
         return result
