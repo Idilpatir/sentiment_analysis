@@ -1,6 +1,18 @@
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import re
+
 class Sentiment_Analyzer:
     def __init__(self) -> None:
-        pass
+        self.Analyzer = SentimentIntensityAnalyzer()
+
+    def _Clean(self,text):
+        return " ".join(re.sub(r'[^\w?!]', ' ', text).split())   ####
+
+    
+
 
     def Analyze(self, text):
-        return 5
+        clean_text = self._Clean(text)
+        score = self.Analyzer.polarity_scores(clean_text)
+        comp = score["compound"]
+        return (comp+1)*5
