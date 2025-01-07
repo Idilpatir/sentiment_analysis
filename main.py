@@ -1,6 +1,6 @@
-from data_reader.youtube_reader import Youtube_Reader 
+from data_reader import Youtube_Reader 
 from dotenv import load_dotenv, dotenv_values
-from sentiment_analysis.sentimet_analysis import Sentiment_Analyzer
+from sentiment_analysis import Sentiment_Analyzer
 load_dotenv()
 
 if __name__ == "__main__":
