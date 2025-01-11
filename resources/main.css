@@ -1,0 +1,16 @@
+.search_bar{
+    width: 50%;
+
+    #url_input{
+        width: 69%; 
+    }
+
+    #submit{
+        width: 29%;
+    }
+
+    #count{
+        width: 100%;
+    }
+
+}
