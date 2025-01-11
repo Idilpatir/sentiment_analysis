@@ -20,6 +20,12 @@ load_dotenv()
 #         score = analyzer.Analyze(comment)
 #         print(f"Comment: {comment}")
 #         print(f"Score: {score}")
+
+API_KEY = dotenv_values(".env")["API_KEY"]
+reader = Youtube_Reader(API_KEY)
+# result=reader.Data_Read("https://www.youtube.com/watch?v=16jA-6hiSUo&list=RD16jA-6hiSUo&start_radio=1")
+# print(result)
+
 app = FastAPI()
 
 app.mount("/resources", StaticFiles(directory="resources"), name="static")
@@ -27,5 +33,14 @@ app.mount("/resources", StaticFiles(directory="resources"), name="static")
 @app.get("/")   
 async def Website():
     return FileResponse("main.html")
+
+@app.get("/api")
+async def Get_Data(video_url : str, count : int = 20):
+    return {
+        "data" : reader.Data_Read(video_url),
+        "comments" : reader.Comments_Read(video_url, count)
+    }
+    
+
 
 

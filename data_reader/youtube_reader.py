@@ -12,7 +12,7 @@ class Youtube_Reader:
         return video_id
     
 
-    def Read(self, video_url: str, count: int=20) -> list[str]:
+    def Comments_Read(self, video_url: str, count: int=20) -> list[str]:
         video_id = self._Parse(video_url)
         payload = {
             "key" : self.apikey,
@@ -27,3 +27,17 @@ class Youtube_Reader:
             result.append(item["snippet"]["topLevelComment"]["snippet"]["textOriginal"])
 
         return result
+    
+    def Data_Read(self, video_url: str):
+        video_id = self._Parse(video_url)
+        payload = {
+            "key" : self.apikey,
+            "id" : video_id,
+            "part" : "snippet"
+        }
+        r = requests.get('https://www.googleapis.com/youtube/v3/videos', params=payload)
+        json = r.json()
+        return {
+            "title" : json["items"][0]["snippet"]["title"],
+            "thumbnail" : json["items"][0]["snippet"]["thumbnails"]["maxres"]["url"]
+        }
